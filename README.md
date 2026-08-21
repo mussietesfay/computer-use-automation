@@ -30,3 +30,25 @@ Discovery
 → Deterministic Replay
 
 ## Project Status
+- Stage 1 - Project initialization
+- Stage 2 - Development environments configured
+
+## Development Stack
+
+### Frontend
+- React
+- TypeScript
+- Vite
+
+### Backend
+- Node.js
+- Express
+- TypeScript
+
+### Automation
+- Python
+- Playwright
+
+### Planned AI Layer
+- LangGraph
+- LLM
