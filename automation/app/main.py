@@ -1,17 +1,67 @@
-from playwright.sync_api import sync_playwright
+from browser import BrowserManager
+
+from pages.login_page import LoginPage
+from pages.dashboard_page import DashboardPage
+from pages.member_search_page import MemberSearchPage
+from pages.member_details_page import MemberDetailsPage
 
 
 def main() -> None:
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+    browser = BrowserManager()
 
-        page = browser.new_page()
+    page = browser.start_browser()
 
-        page.goto("https://example.com")
+    try:
+        login_page = LoginPage(page)
+        dashboard_page = DashboardPage(page)
+        member_search_page = MemberSearchPage(page)
+        member_details_page = MemberDetailsPage(page)
 
-        print("Page title:", page.title())
+        login_page.open()
 
-        browser.close()
+        login_page.login(
+            username="admin",
+            password="password",
+        )
+
+        dashboard_page.verify_loaded()
+
+        print("Login successful")
+        print("Dashboard loaded")
+
+        dashboard_page.open_member_search()
+
+        member_search_page.verify_loaded()
+
+        print("Member Search loaded")
+
+        member_search_page.search(
+            member_id="12345"
+        )
+
+        member_details_page.verify_loaded()
+
+        print("Member Details loaded")
+
+        member_id = member_details_page.get_member_id()
+        name = member_details_page.get_name()
+        status = member_details_page.get_status()
+        email = member_details_page.get_email()
+        balance = member_details_page.get_savings_balance()
+
+        print("Member Details")
+        print("Member ID:", member_id)
+        print("Name:", name)
+        print("Status:", status)
+        print("Email:", email)
+        print("Savings Balance:", balance)
+
+       
+
+        input("Press Enter to exit...")
+
+    finally:
+        browser.stop_browser()
 
 
 if __name__ == "__main__":

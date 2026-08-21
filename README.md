@@ -32,6 +32,8 @@ Discovery
 ## Project Status
 - Stage 1 - Project initialization
 - Stage 2 - Development environments configured
+- Stage 3 - Target banking application
+- Stage 4 - Basic Playwright automation
 
 ## Development Stack
 
@@ -89,3 +91,18 @@ Expected:
 - Status: Active
 - Email: john@example.com
 - Savings Balance: $12,450.00
+
+
+## Browser Automation
+
+The automation service uses Python Playwright.
+
+Current automated workflow:
+
+1. Open target banking application
+2. Login
+3. Verify dashboard
+4. Open member search
+5. Search by member ID
+6. Verify member details
+7. Extract member details
