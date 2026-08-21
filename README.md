@@ -34,6 +34,7 @@ Discovery
 - Stage 2 - Development environments configured
 - Stage 3 - Target banking application
 - Stage 4 - Basic Playwright automation
+- Stage 5 - Computer surface abstraction
 
 ## Development Stack
 
@@ -106,3 +107,26 @@ Current automated workflow:
 5. Search by member ID
 6. Verify member details
 7. Extract member details
+
+## Computer Surface
+
+Browser automation is isolated behind a generic computer surface.
+
+Current implementation:
+
+ComputerSurface
+→ PlaywrightSurface
+→ Playwright
+→ Target Application
+
+Supported operations:
+
+- navigate
+- observe
+- click
+- type
+- read
+- visibility verification
+- screenshot
+
+Both future discovery and deterministic replay will interact through this surface rather than depending directly on Playwright.

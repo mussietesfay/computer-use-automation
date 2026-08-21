@@ -1,23 +1,31 @@
-from playwright.sync_api import Page, expect
+from computer.surface import ComputerSurface
+from computer.types import Target
 
 
 class MemberDetailsPage:
-    def __init__(self, page: Page) -> None:
-        self.page = page
 
-    def verify_loaded(self) -> None:
-        expect(
-            self.page.get_by_role(
-                "heading",
-                name="Member Details",
+    def __init__(
+        self,
+        surface: ComputerSurface,
+    ) -> None:
+        self.surface = surface
+
+    def verify_loaded(self) -> bool:
+        return self.surface.is_visible(
+            Target(
+                strategy="role",
+                role="heading",
+                value="Member Details",
             )
-        ).to_be_visible()
+        )
 
     def get_member_id(self) -> str:
-        text = self.page.get_by_text(
-            "Member ID:",
-            exact=False,
-        ).inner_text()
+        text = self.surface.read(
+            Target(
+                strategy="text",
+                value="Member ID:",
+            )
+        )
 
         return text.replace(
             "Member ID:",
@@ -25,10 +33,12 @@ class MemberDetailsPage:
         ).strip()
 
     def get_name(self) -> str:
-        text = self.page.get_by_text(
-            "Name:",
-            exact=False,
-        ).inner_text()
+        text = self.surface.read(
+            Target(
+                strategy="text",
+                value="Name:",
+            )
+        )
 
         return text.replace(
             "Name:",
@@ -36,10 +46,12 @@ class MemberDetailsPage:
         ).strip()
 
     def get_status(self) -> str:
-        text = self.page.get_by_text(
-            "Status:",
-            exact=False,
-        ).inner_text()
+        text = self.surface.read(
+            Target(
+                strategy="text",
+                value="Status:",
+            )
+        )
 
         return text.replace(
             "Status:",
@@ -47,10 +59,12 @@ class MemberDetailsPage:
         ).strip()
 
     def get_email(self) -> str:
-        text = self.page.get_by_text(
-            "Email:",
-            exact=False,
-        ).inner_text()
+        text = self.surface.read(
+            Target(
+                strategy="text",
+                value="Email:",
+            )
+        )
 
         return text.replace(
             "Email:",
@@ -58,10 +72,12 @@ class MemberDetailsPage:
         ).strip()
 
     def get_savings_balance(self) -> str:
-        text = self.page.get_by_text(
-            "Savings Balance:",
-            exact=False,
-        ).inner_text()
+        text = self.surface.read(
+            Target(
+                strategy="text",
+                value="Savings Balance:",
+            )
+        )
 
         return text.replace(
             "Savings Balance:",

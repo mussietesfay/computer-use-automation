@@ -1,24 +1,41 @@
-from playwright.sync_api import Page, expect
+from computer.surface import ComputerSurface
+from computer.types import Target
 
 
 class MemberSearchPage:
-    def __init__(self, page: Page) -> None:
-        self.page = page
 
-    def verify_loaded(self) -> None:
-        expect(
-            self.page.get_by_role(
-                "heading",
-                name="Member Search",
+    def __init__(
+        self,
+        surface: ComputerSurface,
+    ) -> None:
+        self.surface = surface
+
+    def verify_loaded(self) -> bool:
+        return self.surface.is_visible(
+            Target(
+                strategy="role",
+                role="heading",
+                value="Member Search",
             )
-        ).to_be_visible()
+        )
 
-    def search(self, member_id: str) -> None:
-        self.page.get_by_label(
-            "Member ID"
-        ).fill(member_id)
+    def search(
+        self,
+        member_id: str,
+    ) -> None:
 
-        self.page.get_by_role(
-            "button",
-            name="Search",
-        ).click()
+        self.surface.type(
+            Target(
+                strategy="label",
+                value="Member ID",
+            ),
+            member_id,
+        )
+
+        self.surface.click(
+            Target(
+                strategy="role",
+                role="button",
+                value="Search",
+            )
+        )
