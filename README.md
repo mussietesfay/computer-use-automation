@@ -52,3 +52,40 @@ Discovery
 ### Planned AI Layer
 - LangGraph
 - LLM
+
+## Target Application
+
+The target application is a controlled banking/member portal used
+to demonstrate computer-use automation.
+
+### Manual Workflow
+
+1. Login
+2. Open Member Search
+3. Enter a member ID
+4. Search for the member
+5. View member details
+6. Read the savings balance
+
+### Test Credentials
+
+Username:
+
+admin
+
+Password:
+
+password
+
+### Example Member
+
+Member ID:
+
+12345
+
+Expected:
+
+- Name: John Smith
+- Status: Active
+- Email: john@example.com
+- Savings Balance: $12,450.00
